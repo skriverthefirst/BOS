@@ -1,2 +1,2 @@
-/src/api/__pychache__/*
+*.pyc
 .DS_Store
