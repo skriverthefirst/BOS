@@ -10,15 +10,24 @@ dirname = os.path.dirname(__file__)
 with database.DBHandler() as db:
     app = Flask(__name__)
 
-    # Routes for the REST API
     @app.route('/')
     def hello():
         return f'Hello, world!'
 
-    # GET
-
-    # POST
-
     # PUT
+    @app.route('/putFood', methods=['PUT'])
+    def put_food():
+        # Send request to drinks / kitchen
+        db.put_food()
+
+    @app.route('/putDrinks', methods=['PUT'])
+    def put_drinks():
+        # Send request to drinks / kitchen
+        db.put_drinks()
+
+    @app.route('/putSnacks', methods=['PUT'])
+    def put_snacks():
+        # Send request to drinks / kitchen
+        db.put_snacks()
 
     # DELETE
