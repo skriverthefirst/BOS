@@ -40,10 +40,10 @@ with database.DBHandler() as db:
         '''
 
         # Send request to drinks / kitchen
-        db.put_food()
+        db.put_food(request.get_json())
         # db.put_drinks()
         # db.put_snacks()
-        return jsonify({"Request accepted!"}, 200)
+        return jsonify({"Success": True}), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
