@@ -16,7 +16,7 @@ with database.DBHandler() as db:
     def hello():
         return {'products' : ['Food', 'Drinks', 'Snacks']}
 
-    @app.route('/putOrder', methods=['PUT'])
+    @app.route('/putOrder', methods=['POST'])
     def put_order():
         '''
             Orders should come in as followes:
@@ -41,8 +41,9 @@ with database.DBHandler() as db:
 
         # Send request to drinks / kitchen
         db.put_food()
-        db.put_drinks()
-        db.put_snacks()
+        # db.put_drinks()
+        # db.put_snacks()
+        return jsonify({"Request accepted!"}, 200)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)

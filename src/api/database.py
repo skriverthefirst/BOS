@@ -16,21 +16,22 @@ class DBHandler:
         DBHandler is made to control all incoming and outgoing database calls
     '''
     def __enter__(self):
-        pass
+        return DBHandler()
 
     def __init__(self):
         db = firestore.client()
-        food_ref = db.collection('foods')
-        drinks_ref = db.collection('drinks')
-        snacks_ref = db.collection('snacks')
+        db.collection('orders')
+        self.food_ref = db.document('orders/foods')
+        self.drinks_ref = db.document('orders/drinks')
+        self.snacks_ref = db.document('orders/snacks')
 
-    def put_food():
+    def put_food(self):
+        self.food_ref.update({'Food': '3'})
+
+    def put_drinks(self):
         pass
 
-    def put_drinks():
-        pass
-
-    def put_snacks():
+    def put_snacks(self):
         pass
 
 
