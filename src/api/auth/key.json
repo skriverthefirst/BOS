@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "bestillingsorganiseringssystem",
+    "private_key_id": "61223ad090ae8c8e26af3a054248940eeb292d98",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC1/QjCDaM1fFpm\nNlDeH39RR3AEiD79gWKtkL3Nh+s2jbxWsHG5kWD/EcAgRs/EIa0BHhbql/INZfNn\nIESn7B14Zs2UI86cF73OCaxbWw9xqvMH2MykYuZqMyUJsTo3cTvcFufgY5KOZRB2\nNFQw1zzngythB2iwnm2UC2uvatn4+c3Vpxmz+1Ndo3nbIOaHyde1H+kRGh3pCmWV\ngNyniKYcLechlWkX3ZsGjrkvir32fwb9wHmFrIiSoFG17WK5EOtGvj6DxqHrRKRP\nuRQwWE4MG0XyiJgtP/+Y2C6eN0UnGK0y3ksJoLVz4SBxDMooemkYp4canKMWuAgz\naISR1ThLAgMBAAECggEAJFyi79b2ubyXeV236bHEaBKMfLNWVqOP+lr1uYfDRPqr\n22xUxL2Z8kzzJN/RKoCKBzOiY4wphmjM6dmGLkEcoE52G/fNk92ghHblU7mNi+oa\ntgIo3V2PaT+/0kBxf9tlmPOQsAJlKYNi9yM8gSe4WQ+ZzsDCt6tn/JENmpaQZ9D3\nZcLBww9L4TaHqqSCo0VeoutYkhv4wEzbN1jhR2bSTgw/Mh+2FcAMCg+6Qrw+0VG9\nvnDPEARB/w8/b4GSzegmSz5OjisG0bgDKaTM/K9Owj4LFQa5JlYsNoQAwbnjEukw\nmTLEYDJ6CEP1KVWlpYDtmOlIWyN2Efm630sY+FYACQKBgQDi0y1BMtoZS7g/8XpG\nq65LhBXD9kF1037i2gcIFRncxkfQ9j8/R26+3nOoYU02Y9qItUDmc3eippx79FY9\nAcHBn1qIXRH6P+4bGIOiW7HcNT56hAXjUYuPI4QxKiLzjQYNCOzITIAyHfyJ6UQM\nkhh+crTWFVxZUhlKDA3qGNHPEwKBgQDNZX6ilCuodcDxBrVyonu3glbmMXcOEnu2\nu1tR35rtQHYCpqQ2oU4Cj5bmaWj9Fnfl58rSuF4DDieVJct1I5vBpiBk9bEWWRB4\nbcOo8+U4sXAAUshNPbQiopUiwC96VrAXrSW6UhezgKE9MKmWdGwerKf0pWtubQeD\n50ndANlA6QKBgQCMv9PWIFL73WOgshxZHBFUpMrIxddK4QlchURVvJpGx/cqcJNA\nlfffkrQcKPy7omyp5ic2mTIEiPSTakPVKXDs0BBii7YrHl6HC8grCFEuvw9dAO2S\naDh8guJ1i5sSnFDD5+TeSbJG5xqdDVV/o2x1koIqUijy+CHfM+myeOJAZwKBgQDF\nUR6hsvRqBo2PPuGrOdreRTGUPKrh8vG0bzLgaY6dI5L7IvmYnceigCz4NwWsNRyD\n2fSoEIQILV3rU36sjsO/+gce1kUEchV3jAMuWPe5SgSN2vkf8woNR+E7nCNARO0w\nIZ+f6eNpB0Ze0VPp/PgtU7KaPRwC3m0c02HLFVigmQKBgBu298de2iuJ8yzosRrr\n5Si37hpo8KJiMdVfLHy5y4WOPQCSKcP3sZX1OOQOpLBLANRwY3RDCljt/rvnGvSN\nm1LQ3yqfBsOc9DOCmHghd83VshSS3l7mQx5A89sFEJ2VZsQofSqO7TcjjtNmf+cT\niesyWBLLXpegIy8YmFXOo58+\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-3ctam@bestillingsorganiseringssystem.iam.gserviceaccount.com",
+    "client_id": "103206333196063395593",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-3ctam%40bestillingsorganiseringssystem.iam.gserviceaccount.com"
+}
