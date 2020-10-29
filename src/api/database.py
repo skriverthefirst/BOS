@@ -26,31 +26,51 @@ class DBHandler:
         self.drinks_ref = self.db.document('orders/drinks')
         self.snacks_ref = self.db.document('orders/snacks')
 
-    def put_food(self, incoming_json):
-        currentFoodListKV = self._get_collection_data('foods')
-        currentFoodListKeys = [key for key in currentFoodListKV]
-        print(currentFoodListKeys)
+    def put_food(self, incomingJson):
+        dbFoodListK, dbFoodListV, inJsonK, inJsonV = self._extract_keys_values(incomingJson, 'foods', 'Food')
 
-        for food in incoming_json:
-            print(food)
-        # Update use to create new entries & update the already existing.
-        self.food_ref.update(incoming_json)
-        # pass
+        for index, food in enumerate(inJsonK):
+            if food in dbFoodListK:
+                incomingJson['Food'][food] = dbFoodListV[index] + inJsonV[index]
 
-    def put_drinks(self):
-        pass
+        self.food_ref.update(incomingJson)
 
-    def put_snacks(self):
-        pass
+    def put_drinks(self, incomingJson):
+        dbDrinkListK, dbDrinkListV, inJsonK, inJsonV = self._extract_keys_values(incomingJson, 'drinks', 'Drink')
 
-    def _get_collection_data(self, document):
-        dbOrderCollection = self.db.collection('orders').get()
+        for index, drink in enumerate(inJsonK):
+            if drink in dbDrinkListK:
+                incomingJson['Drink'][drink] = dbDrinkListV[index] + inJsonV[index]
+
+        self.food_ref.update(incomingJson)
+
+    def put_snacks(self, incomingJson):
+        dbSnackListK, dbSnackListV, inJsonK, inJsonV = self._extract_keys_values(incomingJson, 'snacks', 'Snack')
+
+        for index, food in enumerate(inJsonK):
+            if food in dbFoodListK:
+                incomingJson['Snack'][snack] = dbSnackListV[index] + inJsonV[index]
+
+        self.food_ref.update(incomingJson)
+
+    def _get_document_data(self, document):
         if document == "foods":
-            return dbOrderCollection[0].to_dict()
+            foods = self.food_ref.get().to_dict()
+            return foods["Food"]
         elif document == "drinks":
-            dbOrderCollection[1].to_dict()
+            drinks = self.drinks_ref.get().to_dict()
+            return drinks["Drinks"]
         elif document == "snacks":
-            dbOrderCollection[2].to_dict()
+            snacks = self.snacks_ref.get().to_dict()
+            return snacks["Snacks"]
+
+    def _extract_keys_values(self, incomingJson, document, subject):
+        currentFoodListKV = self._get_document_data(document)
+        currentFoodListKeys = [key for key in currentFoodListKV.keys()]
+        currentFoodListValues = [value for value in currentFoodListKV.values()]
+        incomingJsonKeys = [key for key in incomingJson.get(subject).keys()]
+        incomingJsonValues = [key for key in incomingJson.get(subject).values()]
+        return currentFoodListKeys, currentFoodListValues, incomingJsonKeys, incomingJsonValues
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         pass
