@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'consumer/TableNumberPage.dart';
+import 'globals/globals.dart';
 
 class FTSPage extends StatelessWidget {
   @override
@@ -25,6 +26,7 @@ class FTSPage extends StatelessWidget {
                 "ConsumerButton",
                 "Consumer",
                 () {
+                  isFTS = true;
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => TableNumberPage())
