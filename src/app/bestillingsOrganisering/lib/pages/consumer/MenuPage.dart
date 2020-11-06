@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
+import 'package:som/pages/consumer/ReceiptPage.dart';
+import '../globals/menuClass.dart';
 import '../globals/texts.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 
-class MenuPage extends StatelessWidget {
+class MenuPage extends StatefulWidget {
+  @override
+  _menuState createState() => _menuState();
+}
+
+class _menuState extends State<MenuPage> {
   Future<String> loadJson() async => await rootBundle.loadString('assets/menu.txt');
 
   List<Menu> chosenMenuItems = [];
@@ -35,9 +41,6 @@ class MenuPage extends StatelessWidget {
                       return Column(
                         children: menus.map<Widget>((menu)=>Container(
                           width: (MediaQuery.of(context).size.width) / 3 * 2,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.blueAccent)
-                          ),
                           child: Row(
                             children: <Widget>[
                               Expanded(
@@ -59,6 +62,7 @@ class MenuPage extends StatelessWidget {
                                     child: IconButton(
                                       icon: Icon(Icons.add),
                                       onPressed: () {
+                                        addItem(menu);
                                         print(menu.title);
                                       },
                                     )
@@ -77,24 +81,23 @@ class MenuPage extends StatelessWidget {
               ),
             ),
             Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.blueAccent)
-              ),
               height: (MediaQuery.of(context).size.height),
               width: (MediaQuery.of(context).size.width) / 3,
               child: Column(
                 children: <Widget>[
                   Expanded(
                     flex: 10,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blueAccent)
-                      ),
-                      child: Column(
-                        
+                    child: Column(
+                        children: chosenMenuItems.map<Widget>((menu)=>Container(
+                            child: Column(
+                              children: <Widget>[
+                                Text(menu.title)
+                              ],
+                            ),
+                          ),
+                        ).toList(),
                       ),
                     ),
-                  ),
                   Expanded(
                     flex: 2,
                     child: SizedBox(
@@ -103,7 +106,12 @@ class MenuPage extends StatelessWidget {
                           child: Text("Afslut Order",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ReceiptPage(chosenMenuList))
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -115,32 +123,10 @@ class MenuPage extends StatelessWidget {
       ),
     );
   }
-}
 
-class Menu {
-  final String title;
-  final String description;
-
-  Menu({this.title, this.description});
-
-  static List<Menu> convertSnapshotToMenus(snapshotData) {
-    List<Menu> listOfMenusObject = [];
-    var listOfMenusJson = jsonDecode(snapshotData)['menus'];
-
-    for(var menu in listOfMenusJson){
-      Menu menuItem = Menu.fromJson(menu);
-      listOfMenusObject.add(menuItem);
-    }
-
-    return listOfMenusObject;
+  void addItem(Menu menu) {
+    setState(() {
+      chosenMenuItems.add(menu);
+    });
   }
-
-  factory Menu.fromJson(Map<String, dynamic> json) => Menu(
-    title: json['title'],
-    description: json['description']
-  );
-  Map<String, dynamic> toJson() => {
-    "title": title,
-    "description": description,
-  };
 }
