@@ -1,0 +1,1 @@
+{"menus":[{"title": "Ribeye m. fritter","description" : "Denne udsøgte Ribeye kommer fra en eller anden gård ude vest på, den serveres med Pommes Frittes & Bearnaise sovs."},{"title": "Oksemørbrad m. bagt kartoffel","description": "En helt anden beskrivelse"}]}
