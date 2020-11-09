@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:som/pages/consumer/ReceiptPage.dart';
 import '../globals/menuClass.dart';
 import '../globals/texts.dart';
@@ -107,10 +108,15 @@ class _menuState extends State<MenuPage> {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ReceiptPage(chosenMenuList))
-                          );
+                          if(chosenMenuItems.length > 0)
+                          {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ReceiptPage(chosenMenuItems))
+                            );
+                          } else {
+                            Fluttertoast.showToast(msg: "You have no items chosen!");
+                          }
                         },
                       ),
                     ),
