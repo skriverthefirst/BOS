@@ -12,9 +12,9 @@ app = Flask(__name__)
 with database.DBHandler() as db:
     # Revert debug when development is done
 
-    @app.route('/')
-    def hello():
-        return {'products' : ['Food', 'Drinks', 'Snacks']}
+    @app.route('/', methods=['GET'])
+    def root():
+        return jsonify({"Success": True}), 200
 
     @app.route('/putOrder', methods=['POST'])
     def put_order():
@@ -38,12 +38,24 @@ with database.DBHandler() as db:
                 ]
             }
         '''
+        incomingJson = request.get_json()
 
-        # Send request to drinks / kitchen
-        db.put_food(request.get_json())
-        # db.put_drinks()
-        # db.put_snacks()
-        return jsonify({"Success": True}), 200
+        if len(incomingJson) > 0:
+            food = incomingJson[0] if "Food" in incomingJson[0] else []
+            drinks = incomingJson[1] if "Drinks" in incomingJson[1] else []
+            snacks = incomingJson[2] if "Snacks" in incomingJson[2] else []
+
+            print(f"FOOD! {food}")
+            print(f"DRINKS! {drinks}")
+            print(f"SNACKS! {snacks}")
+
+            # Send request to drinks / kitchen
+            # db.put_food(food)
+            # db.put_drinks()
+            # db.put_snacks()
+            return jsonify({"Success": True}), 200
+        else:
+            return jsonify({}), 400
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
