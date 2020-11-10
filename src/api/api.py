@@ -38,24 +38,21 @@ with database.DBHandler() as db:
                 ]
             }
         '''
-        incomingJson = request.get_json()
+        incomingJson = request.get_json(force=True)
 
-        if len(incomingJson) > 0:
-            food = incomingJson[0] if "Food" in incomingJson[0] else []
-            drinks = incomingJson[1] if "Drinks" in incomingJson[1] else []
-            snacks = incomingJson[2] if "Snacks" in incomingJson[2] else []
+        food = incomingJson[0] if len(incomingJson) > 0 and "Food" in incomingJson[0] else []
+        drinks = incomingJson[1] if len(incomingJson) > 1 and "Drinks" in incomingJson[1] else []
+        snacks = incomingJson[2] if len(incomingJson) > 2 and "Snacks" in incomingJson[2] else []
 
-            print(f"FOOD! {food}")
-            print(f"DRINKS! {drinks}")
-            print(f"SNACKS! {snacks}")
+        print(f"FOOD! {food}")
+        print(f"DRINKS! {drinks}")
+        print(f"SNACKS! {snacks}")
 
-            # Send request to drinks / kitchen
-            # db.put_food(food)
-            # db.put_drinks()
-            # db.put_snacks()
-            return jsonify({"Success": True}), 200
-        else:
-            return jsonify({}), 400
+        #     # Send request to drinks / kitchen
+        #     # db.put_food(food)
+        #     # db.put_drinks()
+        #     # db.put_snacks()
+        return jsonify({"Success": True}), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)

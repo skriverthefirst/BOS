@@ -45,7 +45,7 @@ class ReceiptPage extends StatelessWidget {
                   icon: Icon(Icons.check),
                   onPressed: () {
                     FutureBuilder(
-                      future: http.get(restUrl), //http.post(restUrl, body: json.encode(chosenMenuList))
+                      future: http.post(restUrl, body: createJsonString(chosenMenuList)),
                       builder: (context, snapshot) {
                       },
                     );
@@ -66,4 +66,15 @@ class ReceiptPage extends StatelessWidget {
       ),
     );
   }
+}
+
+String createJsonString(final List<Menu> chosenMenuList) {
+  var jsonString = [{"Food":[]}];
+
+  for(var menu in chosenMenuList) {
+    jsonString[0]['Food'].add(menu);
+  }
+
+  return json.encode(jsonString);
+
 }
