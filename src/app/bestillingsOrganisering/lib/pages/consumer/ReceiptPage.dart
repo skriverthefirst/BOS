@@ -45,7 +45,7 @@ class ReceiptPage extends StatelessWidget {
                   icon: Icon(Icons.check),
                   onPressed: () {
                     FutureBuilder(
-                      future: http.post(restUrl, body: createJsonString(chosenMenuList)),
+                      future: http.post(putOrderUrl, body: createJsonString(chosenMenuList)),
                       builder: (context, snapshot) {
                       },
                     );

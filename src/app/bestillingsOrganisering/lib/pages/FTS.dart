@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'kitchen/KitchenPage.dart';
 import 'consumer/TableNumberPage.dart';
 import 'globals/globals.dart';
 
@@ -17,12 +18,6 @@ class FTSPage extends StatelessWidget {
             children: <Widget>[
               _fab(
                 context,
-                "receptionButton",
-                "Reception",
-                () {}
-              ),
-              _fab(
-                context,
                 "ConsumerButton",
                 "Consumer",
                 () {
@@ -37,7 +32,12 @@ class FTSPage extends StatelessWidget {
                 context,
                 "kitchenButton",
                 "Kitchen",
-                () {}
+                () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => KitchenPage())
+                  );
+                }
               ),
             ],
           ),
