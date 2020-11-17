@@ -22,8 +22,8 @@ class DBHandler:
     def __init__(self):
         self.db = firestore.client()
         self.food_ref = self.db.document('orders/foods')
-        self.drinks_ref = self.db.document('orders/drinks')
-        self.snacks_ref = self.db.document('orders/snacks')
+        # self.drinks_ref = self.db.document('orders/drinks')
+        # self.snacks_ref = self.db.document('orders/snacks')
 
     def put_food(self, incomingJson):
         if len(incomingJson) > 0:
@@ -38,42 +38,42 @@ class DBHandler:
         else:
             return False
 
-    def put_drinks(self, incomingJson):
-        if len(incomingJson) > 0:
-            dbDrinkListK, dbDrinkListV, inJsonK, inJsonV = self._extract_keys_values(incomingJson, 'drinks', 'Drink')
+    # def put_drinks(self, incomingJson):
+    #     if len(incomingJson) > 0:
+    #         dbDrinkListK, dbDrinkListV, inJsonK, inJsonV = self._extract_keys_values(incomingJson, 'drinks', 'Drink')
 
-            for index, drink in enumerate(inJsonK):
-                if drink in dbDrinkListK:
-                    incomingJson['Drink'][drink] = dbDrinkListV[index] + inJsonV[index]
+    #         for index, drink in enumerate(inJsonK):
+    #             if drink in dbDrinkListK:
+    #                 incomingJson['Drink'][drink] = dbDrinkListV[index] + inJsonV[index]
 
-            # self.food_ref.update(incomingJson)
-            return True
-        else:
-            return False
+    #         # self.food_ref.update(incomingJson)
+    #         return True
+    #     else:
+    #         return False
 
-    def put_snacks(self, incomingJson):
-        if len(incomingJson) > 0:
-            dbSnackListK, dbSnackListV, inJsonK, inJsonV = self._extract_keys_values(incomingJson, 'snacks', 'Snack')
+    # def put_snacks(self, incomingJson):
+    #     if len(incomingJson) > 0:
+    #         dbSnackListK, dbSnackListV, inJsonK, inJsonV = self._extract_keys_values(incomingJson, 'snacks', 'Snack')
 
-            for index, food in enumerate(inJsonK):
-                if food in dbFoodListK:
-                    incomingJson['Snack'][snack] = dbSnackListV[index] + inJsonV[index]
+    #         for index, food in enumerate(inJsonK):
+    #             if food in dbFoodListK:
+    #                 incomingJson['Snack'][snack] = dbSnackListV[index] + inJsonV[index]
 
-            self.food_ref.update(incomingJson)
-            return True
-        else:
-            return False
+    #         self.food_ref.update(incomingJson)
+    #         return True
+    #     else:
+    #         return False
 
     def _get_document_data(self, document):
         if document == "foods":
             foods = self.food_ref.get().to_dict()
             return foods["Food"]
-        elif document == "drinks":
-            drinks = self.drinks_ref.get().to_dict()
-            return drinks["Drinks"]
-        elif document == "snacks":
-            snacks = self.snacks_ref.get().to_dict()
-            return snacks["Snacks"]
+        # elif document == "drinks":
+        #     drinks = self.drinks_ref.get().to_dict()
+        #     return drinks["Drinks"]
+        # elif document == "snacks":
+        #     snacks = self.snacks_ref.get().to_dict()
+        #     return snacks["Snacks"]
 
     def _extract_keys_values(self, incomingJson, document, subject):
         currentFoodListKV = self._get_document_data(document)

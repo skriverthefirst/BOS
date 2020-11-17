@@ -10,7 +10,8 @@ dirname = os.path.dirname(__file__)
 app = Flask(__name__)
 
 with database.DBHandler() as db:
-    # Revert debug when development is done
+
+    orders = []
 
     @app.route('/', methods=['GET'])
     def root():
@@ -20,23 +21,30 @@ with database.DBHandler() as db:
     def put_order():
         '''
             Orders should come in as followes:
-            {
-                Food : [
-                    "Food nr. 1" : "Amount",
-                    "Food nr. 2" : "Amount",
-                    "Food nr. 3" : "Amount",
-                    ],
-                Drinks : [
-                    "Drink nr. 1" : ["Amount", "Size"],
-                    "Drink nr. 2" : ["Amount", "Size"],
-                    "Drink nr. 3" : ["Amount", "Size"],
-                    ],
-                Snacks : [
-                    "Snack nr. 1" : ["Amount", "Size"],
-                    "Snack nr. 2" : ["Amount", "Size"],
-                    "Snack nr. 3" : ["Amount", "Size"],
-                ]
-            }
+            [
+                {
+                    "Food" : {
+                        "FoodNrOne":2,
+                        "FoodNrTwo":2,
+                        "FoodNrThree":2,
+                        "FoodNrFour": 2
+                    }
+                },
+                {
+                    "Drinks" : {
+                        "DrinkNrOne" : {"Amount" : 2, "Size": 1},
+                        "DrinkNrTwo" : {"Amount" : 2, "Size": 2},
+                        "DrinkNrThree" : {"Amount" : 2, "Size": 3}
+                    }
+                },
+                {
+                    "Snacks" : {
+                        "SnackNrOne" : {"Amount" : 2, "Size": 1},
+                        "SnackNrTwo" : {"Amount" : 2, "Size": 2},
+                        "SnackNrThree" : {"Amount" : 2, "Size": 3}
+                    }
+                }
+            ]
         '''
         incomingJson = request.get_json(force=True)
 
@@ -44,15 +52,23 @@ with database.DBHandler() as db:
         drinks = incomingJson[1] if len(incomingJson) > 1 and "Drinks" in incomingJson[1] else []
         snacks = incomingJson[2] if len(incomingJson) > 2 and "Snacks" in incomingJson[2] else []
 
+        orders.append(food)
+
         print(f"FOOD! {food}")
         print(f"DRINKS! {drinks}")
         print(f"SNACKS! {snacks}")
 
         #     # Send request to drinks / kitchen
         #     # db.put_food(food)
-        #     # db.put_drinks()
-        #     # db.put_snacks()
         return jsonify({"Success": True}), 200
+
+    @app.route("/getOrder", methods=['GET'])
+    def get_order():
+        if not orders:
+            return jsonify({"List is empty": False}), 202
+        else:
+            orders.clear()
+            return jsonify({"Sucess": True}), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
